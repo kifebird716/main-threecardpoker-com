@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://kifebird716.github.io/main-threecardpoker-com/sitemap.xml

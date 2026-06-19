@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.2, user-scalable=yes">
+    <title>炸金花游戏 · 了解这款经典牌类玩法</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background: #f8fbfc;
+            color: #1e2c3a;
+            line-height: 1.6;
+            padding: 20px 16px 40px;
+        }
+
+        .page {
+            max-width: 1120px;
+            margin: 0 auto;
+        }
+
+        /* hero 区域 — 蓝绿渐变卡片 */
+        .hero {
+            background: linear-gradient(145deg, #0b4f6c 0%, #178b7e 100%);
+            color: #fff;
+            border-radius: 32px 32px 32px 8px;
+            padding: 36px 28px 40px;
+            margin-bottom: 32px;
+            box-shadow: 0 10px 20px rgba(11, 79, 108, 0.18);
+            transition: all 0.2s ease;
+        }
+
+        .hero h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 16px;
+            line-height: 1.2;
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            padding: 0 8px 4px 0;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 580px;
+            opacity: 0.92;
+            margin-bottom: 28px;
+        }
+
+        .hero-extra {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px 20px;
+            align-items: center;
+            background: rgba(255,255,255,0.08);
+            border-radius: 60px;
+            padding: 12px 20px 12px 24px;
+            backdrop-filter: blur(2px);
+        }
+
+        .hero-extra span {
+            background: #1d4d5e;
+            padding: 6px 18px;
+            border-radius: 40px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #d4f2ed;
+        }
+
+        .hero-extra .tagline {
+            background: transparent;
+            padding: 0;
+            color: #e1faf5;
+        }
+
+        /* 网格卡片区 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 22px 20px 24px;
+            box-shadow: 0 4px 10px rgba(0, 30, 40, 0.05);
+            border: 1px solid #e2edf2;
+            transition: transform 0.15s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(11, 79, 108, 0.08);
+        }
+
+        .card-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: #d9efe9;
+            border-radius: 18px;
+            margin-bottom: 14px;
+            font-size: 1.6rem;
+            color: #116b5e;
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #0b3f4e;
+        }
+
+        .card p, .card li {
+            font-size: 0.95rem;
+            color: #2a404e;
+        }
+
+        .card ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 6px;
+        }
+
+        .card li {
+            padding: 4px 0 4px 22px;
+            position: relative;
+        }
+
+        .card li::before {
+            content: "♦";
+            position: absolute;
+            left: 0;
+            color: #0c8575;
+            font-size: 0.8rem;
+            top: 5px;
+        }
+
+        /* 自然链接段落 */
+        .link-block {
+            background: #eaf5f1;
+            border-radius: 28px;
+            padding: 28px 24px 30px;
+            margin: 18px 0 28px;
+            border-left: 6px solid #128b7a;
+        }
+
+        .link-block p {
+            font-size: 1.05rem;
+            max-width: 720px;
+        }
+
+        .link-block a {
+            color: #075f5a;
+            background: #d5f0ea;
+            padding: 2px 8px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 550;
+            transition: background 0.2s;
+        }
+
+        .link-block a:hover {
+            background: #b1e2d6;
+            text-decoration: underline;
+        }
+
+        /* 人群 + 提示混合卡 */
+        .people-tip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-top: 4px;
+        }
+
+        .people-tip > div {
+            background: #fff;
+            border-radius: 24px;
+            padding: 20px 22px 22px;
+            flex: 1 1 220px;
+            box-shadow: 0 2px 8px rgba(0,40,50,0.04);
+            border: 1px solid #daeaf0;
+        }
+
+        .people-tip h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #0f5f5a;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .people-tip ul {
+            list-style: none;
+        }
+
+        .people-tip li {
+            padding: 3px 0;
+            color: #1f3b49;
+            font-size: 0.95rem;
+        }
+
+        .people-tip li::before {
+            content: "•";
+            color: #0e8f7a;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .faq-mini {
+            background: #ffffffd9;
+            border-radius: 24px;
+            padding: 24px 22px;
+            margin: 20px 0 10px;
+            border: 1px solid #d2e7e2;
+        }
+
+        .faq-mini details {
+            margin-bottom: 10px;
+            border-bottom: 1px dashed #bee0d6;
+            padding-bottom: 8px;
+        }
+
+        .faq-mini details:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .faq-mini summary {
+            font-weight: 550;
+            color: #10534d;
+            cursor: pointer;
+            padding: 4px 0;
+            font-size: 1rem;
+        }
+
+        .faq-mini p {
+            margin-top: 8px;
+            color: #1f3846;
+            font-size: 0.95rem;
+            padding-left: 6px;
+        }
+
+        /* 页脚 */
+        .footer-note {
+            margin-top: 38px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #4d6d79;
+            border-top: 1px solid #d4e6e0;
+            padding-top: 28px;
+        }
+
+        .footer-note a {
+            color: #0b7b6b;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .footer-note a:hover {
+            text-decoration: underline;
+        }
+
+        /* 响应式 */
+        @media (max-width: 600px) {
+            .card-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+            .hero {
+                padding: 28px 18px 32px;
+            }
+            .link-block {
+                padding: 22px 18px;
+            }
+            .people-tip {
+                flex-direction: column;
+            }
+        }
+
+        @media (min-width: 720px) {
+            .card-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 1000px) {
+            .card-grid {
+                grid-template-columns: 1fr 1fr 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- 主视觉 hero -->
+    <div class="hero">
+        <h1>炸金花游戏 · 玩法与人群</h1>
+        <p>三张牌比大小，简单明快。想快速判断这个网站是否适合你？下面的卡片帮你理清用途、人群和规则特点。</p>
+        <div class="hero-extra">
+            <span>♠ ♥ ♣ ♦</span>
+            <span class="tagline">经典诈牌 | 心理博弈 | 休闲对局</span>
+        </div>
+    </div>
+
+    <!-- 用途卡片（网格） -->
+    <div class="card-grid">
+        <div class="card">
+            <div class="card-icon">🎯</div>
+            <h3>了解玩法</h3>
+            <p>从牌型大小到加注规则，快速掌握炸金花的基础框架，适合新手扫盲与老手温习。</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">🧠</div>
+            <h3>策略参考</h3>
+            <p>不同位置、底牌与心理 bluff 的常见思路，不教具体套路，只提供通用分析角度。</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">👥</div>
+            <h3>线上对局</h3>
+            <p>站点提供即时匹配与私人房间，可自由选择人数与底注，适合小范围娱乐。</p>
+        </div>
+        <div class="card">
+            <div class="card-icon">📱</div>
+            <h3>移动体验</h3>
+            <p>界面针对手机横竖屏适配，操作直接，不用下载额外应用，浏览器即可参与。</p>
+        </div>
+    </div>
+
+    <!-- 自然链接段落（嵌入 a 标签） -->
+    <div class="link-block">
+        <p>
+            如果你在找一个方便直接上手、没有复杂注册流程的棋牌站点，可以看看 
+            <a href="https://main-threecardpoker.com">炸金花游戏</a> 
+            提供的网页版玩法。牌桌规则接近线下习惯，同时加入自动比牌与即时结算，省去不少手动计算的麻烦。
+        </p>
+        <p style="margin-top: 14px;">
+            相比其他平台，这里更突出快速开局和低门槛，无论用手机还是电脑都能在几秒内进入牌局。
+        </p>
+    </div>
+
+    <!-- 适合人群 + 提示（两列） -->
+    <div class="people-tip">
+        <div>
+            <h4>🎲 适合人群</h4>
+            <ul>
+                <li>喜欢短平快牌类、不想要太复杂规则的人</li>
+                <li>熟悉诈唬（bluff）与概率的休闲玩家</li>
+                <li>想和朋友远程小玩几把，不涉及真金赌注</li>
+                <li>偶尔消遣、对回合制策略有一定兴趣</li>
+            </ul>
+        </div>
+        <div>
+            <h4>💡 场景提示</h4>
+            <ul>
+                <li>好友线上聚会、茶余饭后快速一局</li>
+                <li>等待时间（等车、午休）来一场短盘</li>
+                <li>想测试不同位置下注策略的模拟对局</li>
+                <li>纯娱乐性质，不涉及真实货币交易</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- FAQ 摘要卡片 -->
+    <div class="faq-mini">
+        <details>
+            <summary>炸金花通常需要几人才能开局？</summary>
+            <p>常见为 2–6 人，部分房间支持最多 8 人。人数越多，底池变化和心理博弈空间也更大。</p>
+        </details>
+        <details>
+            <summary>有没有快速比牌的功能？</summary>
+            <p>在该网站中，当牌局进行到一定阶段，系统会自动比较剩余玩家的牌型并展示结果，省去手动翻牌的环节。</p>
+        </details>
+        <details>
+            <summary>游戏需要注册或下载吗？</summary>
+            <p>网页版通过浏览器直接加载，无需安装。部分功能可能需要简单昵称设定，不要求手机或邮箱验证。</p>
+        </details>
+    </div>
+
+    <!-- 页脚（自然出现第二个链接，但保持唯一可见文本） -->
+    <div class="footer-note">
+        <p>
+            了解经典  <a href="https://main-threecardpoker.com">炸金花游戏</a>  · 信息页面仅供介绍参考
+        </p>
+        <p style="margin-top: 12px; opacity: 0.7;">没有夸张承诺，所有玩法以实际网站规则为准。</p>
+    </div>
+
+</div>
+</body>
+</html>
